@@ -23,6 +23,8 @@ public class YoutubeProperties {
 
     private Map<String, MetaData> channel;
 
+    private String tags;
+
     @Getter
     @Setter
     public static class MetaData{

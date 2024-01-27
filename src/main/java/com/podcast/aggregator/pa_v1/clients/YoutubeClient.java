@@ -32,7 +32,8 @@ public class YoutubeClient {
 
 
     public YoutubeV3ApiResponse getVideosUsingChannelId(String channelId){
-        String url = youtubeProperties.getUrl()+"search?key="+youtubeProperties.getKey()+"&channelId="+channelId+"&part=snippet,id&order=date&maxResults="+youtubeProperties.getMaxResults();
+        String url = youtubeProperties.getUrl()+"search?key="+youtubeProperties.getKey()+"&channelId="+channelId+
+                "&part=snippet,id&order=date&maxResults="+youtubeProperties.getMaxResults()+"&type=video&videoDuration=long";
         YoutubeV3ApiResponse response = restTemplate.getForObject(url, YoutubeV3ApiResponse.class);
         log.info("Response list size from youtube {}", response.getItems().size());
         return response;
