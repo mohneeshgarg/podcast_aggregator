@@ -15,6 +15,7 @@ import java.util.Set;
 @RestController
 @Slf4j
 @RequestMapping("/api/videos")
+@CrossOrigin("*")
 public class VideoController {
 
     @Autowired
