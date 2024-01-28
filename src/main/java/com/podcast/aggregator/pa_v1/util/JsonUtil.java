@@ -2,7 +2,7 @@ package com.podcast.aggregator.pa_v1.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.podcast.aggregator.pa_v1.beans.ObjectMapperFactory;
+import com.podcast.aggregator.pa_v1.config.ObjectMapperFactory;
 
 import java.util.Map;
 

@@ -26,13 +26,13 @@ public class VideoController {
     YoutubeService youtubeService;
 
 
-    @RequestMapping("/getAllTaggedVideos")
+    @RequestMapping(value = "/getAllTaggedVideos", method = RequestMethod.GET)
     public List<Video> getAllTaggedVideos(){
         log.info("Got request to get the whole data!");
         return videoDataPersistanceService.getAllTaggedVideos();
     }
 
-    @RequestMapping("/addTags/{videoId}")
+    @RequestMapping(value = "/addTags/{videoId}", method = RequestMethod.POST)
     public String assign(@PathVariable("videoId") String videoId,
                          @RequestParam("tags") String tags){
         Video video = videoDataPersistanceService.getVideoUsingId(videoId);
@@ -51,17 +51,17 @@ public class VideoController {
         return "Video deleted successfully";
     }
 
-    @RequestMapping("/getAllUntaggedVideos")
+    @RequestMapping(value = "/getAllUntaggedVideos", method = RequestMethod.GET)
     public List<Video> getAllUntaggedVideos(){
         return videoDataPersistanceService.getAllUntaggedVideos();
     }
 
-    @RequestMapping("/getAllVideosByTag/{tag}")
+    @RequestMapping(value = "/getAllVideosByTag/{tag}", method = RequestMethod.GET)
     public List<Video> getAllVideosUsingTag(@PathVariable String tag){
         return videoDataPersistanceService.findAllVideosByTagName(tag);
     }
 
-    @RequestMapping("/delete/tags/{videoId}")
+    @RequestMapping(value = "/delete/tags/{videoId}", method = RequestMethod.DELETE)
     public String deleteTags(@PathVariable String videoId,
                              @RequestParam String tags){
         Set<String> tagSet = Set.of(tags.split(","));
@@ -69,7 +69,7 @@ public class VideoController {
         return "Deleted tag from the videos!";
     }
 
-    @RequestMapping("/tags/all")
+    @RequestMapping(value = "/tags/all", method = RequestMethod.GET)
     public List<String> getAllTags(){
         return youtubeService.getAllTheTags();
     }

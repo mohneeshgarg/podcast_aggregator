@@ -12,7 +12,10 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="video_tags")
+@Table(name="video_tags", indexes = {
+        @Index(name = "video_id_and_tag", columnList = "tag, videoId", unique = true),
+        @Index(name="tag", columnList = "tag")
+})
 public class VideoTags {
 
     @Id

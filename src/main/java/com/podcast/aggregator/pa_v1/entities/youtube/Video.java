@@ -14,10 +14,17 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(
+        indexes = {
+                @Index(name="video_publishedAt", columnList = "publishedAt"),
+                @Index(name="video_tags_enabled", columnList = "tagsEnabled")
+        }
+)
 public class Video {
 
     @Id
     public String id;
+
     public String channelId;
 
     @JdbcTypeCode(SqlTypes.JSON)

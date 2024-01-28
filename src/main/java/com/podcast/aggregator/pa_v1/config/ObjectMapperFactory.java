@@ -1,4 +1,4 @@
-package com.podcast.aggregator.pa_v1.beans;
+package com.podcast.aggregator.pa_v1.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

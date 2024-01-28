@@ -1,13 +1,10 @@
 package com.podcast.aggregator.pa_v1.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.podcast.aggregator.pa_v1.beans.ObjectMapperFactory;
 import com.podcast.aggregator.pa_v1.entities.youtube.Video;
 import com.podcast.aggregator.pa_v1.entities.youtube.VideoTags;
 import com.podcast.aggregator.pa_v1.models.youtube.Item;
 import com.podcast.aggregator.pa_v1.repository.VideoRepository;
-import com.podcast.aggregator.pa_v1.repository.VideoTagsRepository;
 import com.podcast.aggregator.pa_v1.util.DateUtils;
 import com.podcast.aggregator.pa_v1.util.JsonUtil;
 import jakarta.transaction.Transactional;

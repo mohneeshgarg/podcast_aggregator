@@ -17,23 +17,23 @@ public class ChannelController {
     @Autowired
     private ChannelPersistanceService channelPersistanceService;
 
-    @RequestMapping("/getAll")
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public List<Channel> getAll(){
         return channelPersistanceService.getAllChannels();
     }
 
-    @RequestMapping("/get/{channelId}")
+    @RequestMapping(value = "/get/{channelId}", method = RequestMethod.GET)
     public Channel getChannelById(@PathVariable String channelId){
         return channelPersistanceService.getChannelById(channelId);
     }
 
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Channel addChannel(@RequestParam String channelId,
                               @RequestParam String name){
         return channelPersistanceService.saveChannel(channelId, name);
     }
 
-    @RequestMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public Channel updateChannel(@RequestParam String channelId,
                                  @RequestParam String name){
         Channel channel = channelPersistanceService.getChannelById(channelId);
@@ -41,7 +41,7 @@ public class ChannelController {
         return channelPersistanceService.updateChannel(channel);
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public void deleteChannel(@RequestParam String channelId){
         channelPersistanceService.deleteChannel(channelId);
     }
