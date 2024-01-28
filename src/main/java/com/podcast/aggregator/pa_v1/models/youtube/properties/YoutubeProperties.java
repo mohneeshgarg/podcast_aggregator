@@ -21,15 +21,4 @@ public class YoutubeProperties {
 
     private Integer maxResults;
 
-    private Map<String, MetaData> channel;
-
-    private String tags;
-
-    @Getter
-    @Setter
-    public static class MetaData{
-        String id;
-        String name;
-    }
-
 }

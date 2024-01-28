@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.podcast.aggregator.pa_v1.models.youtube.Item;
 import com.podcast.aggregator.pa_v1.models.youtube.YoutubeV3ApiResponse;
 import com.podcast.aggregator.pa_v1.models.youtube.properties.YoutubeProperties;
+import com.podcast.aggregator.pa_v1.services.ChannelPersistanceService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class YoutubeClient {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private ChannelPersistanceService channelPersistanceService;
+
 
     public YoutubeV3ApiResponse getVideosUsingChannelId(String channelId){
         String url = youtubeProperties.getUrl()+"search?key="+youtubeProperties.getKey()+"&channelId="+channelId+
@@ -40,11 +44,11 @@ public class YoutubeClient {
     }
 
     public List<Item> getAllVideos(){
-        Map<String, YoutubeProperties.MetaData> channels =  youtubeProperties.getChannel();
+        List<String> channelIds = channelPersistanceService.getAllChannels()
+                .stream().map(channel -> channel.getId()).collect(Collectors.toList());
         List<Item> allVideos = new ArrayList<>();
-        for(String channel: channels.keySet()){
-            YoutubeProperties.MetaData metaData = channels.get(channel);
-            allVideos.addAll(Optional.ofNullable(getVideosUsingChannelId(metaData.getId()).getItems()).orElse(null));
+        for(String channelId: channelIds){
+            allVideos.addAll(Optional.ofNullable(getVideosUsingChannelId(channelId).getItems()).orElse(null));
         }
         log.info("Total videos {}", allVideos.size());
         return allVideos;
@@ -60,10 +64,8 @@ public class YoutubeClient {
             log.info("current batch ids {}", ids);
             String url = youtubeProperties.getUrl()+"videos?key="+youtubeProperties.getKey()+"&id="+ids+"&part=snippet,contentDetails,statistics,id&fields=items(id,snippet(publishedAt,channelId,title,thumbnails,channelTitle,tags,categoryId,description),contentDetails,statistics)";
             YoutubeV3ApiResponse videoMetaData = restTemplate.getForObject(url, YoutubeV3ApiResponse.class);
-            filterShorts(videoMetaData);
             allVideos.addAll(Optional.ofNullable(videoMetaData.getItems()).orElse(null));
         }
-        log.info("Total size after filtering {}", allVideos.size());
         return allVideos;
     }
 

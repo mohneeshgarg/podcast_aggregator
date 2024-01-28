@@ -2,24 +2,7 @@ youtube:
   url: https://www.googleapis.com/youtube/v3/
   maxResults: 100
   key: AIzaSyCvhoKlkMkoTqS8QdrTxIn1lqzAj_t6UI0
-  channel:
-    channel1:
-      id: UCnC8SAZzQiBGYVSKZ_S3y4Q
-      name: Nikhil Kamath
-#    channel2:
-#      id: UCzwCEE_PchiBULMnAJqhGVg
-#      name: Raj Shamani
-#    channel3:
-#      id: UCneyi-aYq4VIBYIAQgWmk_w
-#      name: Ranveer Allahbadia
-#    channel4:
-#      id: UCPxMZIFE856tbTfdkdjzTSQ
-#      name: BeerBiceps
-#    channel5:
-#      id: UCsQoiOrh7jzKmE8NBofhTnQ
-#      name: Varun Mayya
-
-tags: Business, Startups, Motivation, Religious, Education, Fitness/Health, Sports, Future Tech, Jobs, Interview Prep, Stock Market
+tags: Business,Startups,Motivation,Religious,Education,Fitness/Health,Sports,Future Tech,Jobs,Interview Prep,Stock Market
 
 spring:
   datasource:

@@ -4,6 +4,7 @@ import com.podcast.aggregator.pa_v1.entities.youtube.VideoTags;
 import com.podcast.aggregator.pa_v1.entities.youtube.Video;
 import com.podcast.aggregator.pa_v1.services.VideoTagsPersistanceService;
 import com.podcast.aggregator.pa_v1.services.VideoDataPersistanceService;
+import com.podcast.aggregator.pa_v1.services.YoutubeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,9 @@ public class VideoController {
 
     @Autowired
     VideoDataPersistanceService  videoDataPersistanceService;
+
+    @Autowired
+    YoutubeService youtubeService;
 
 
     @RequestMapping("/getAllTaggedVideos")
@@ -47,7 +51,7 @@ public class VideoController {
         return "Video deleted successfully";
     }
 
-    @RequestMapping("/videos/getAllUntaggedVideos")
+    @RequestMapping("/getAllUntaggedVideos")
     public List<Video> getAllUntaggedVideos(){
         return videoDataPersistanceService.getAllUntaggedVideos();
     }
@@ -63,5 +67,10 @@ public class VideoController {
         Set<String> tagSet = Set.of(tags.split(","));
         videoDataPersistanceService.deleteTagFromVideo(videoId, tagSet);
         return "Deleted tag from the videos!";
+    }
+
+    @RequestMapping("/tags/all")
+    public List<String> getAllTags(){
+        return youtubeService.getAllTheTags();
     }
 }

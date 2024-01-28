@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,9 @@ public class YoutubeService {
     @Autowired
     private VideoDataPersistanceService videoDataPersistanceService;
 
+    @Value("${tags}")
+    private String tags;
+
     public void dumpVideoDataIntoDB(){
         List<Item> allVideosUsingChannelIds = youtubeClient.getAllVideos();
         List<String> videoIds = allVideosUsingChannelIds.stream().map(video-> video.getId().getVideoId()).collect(Collectors.toList());
@@ -40,6 +44,10 @@ public class YoutubeService {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    public List<String> getAllTheTags(){
+        return List.of(tags.split(","));
     }
 
 }
